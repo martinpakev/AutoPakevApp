@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutoPakevApp.Data
+namespace AutoPakevApp.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
