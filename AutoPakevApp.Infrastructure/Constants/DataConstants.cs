@@ -16,5 +16,11 @@ namespace AutoPakevApp.Infrastructure.Constants
 
         public const int CategoryNameMaxLength = 50;
         public const int CategoryNameMinLength = 3;
+
+        public const int PartNameMaxLength = 50;
+        public const int PartNameMinLength = 4;
+
+        public const int PartDescriptionMaxLength = 1000;
+        public const int PartDescriptionMinLength = 20;
     }
 }
