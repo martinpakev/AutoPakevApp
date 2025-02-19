@@ -22,5 +22,14 @@ namespace AutoPakevApp.Infrastructure.Constants
 
         public const int PartDescriptionMaxLength = 1000;
         public const int PartDescriptionMinLength = 20;
+
+        public const int UserFirstNameMaxLength = 50;
+        public const int UserFirstNameMinLength = 3;
+
+        public const int UserLastNameMaxLength = 50;
+        public const int UserLastNameMinLength = 3;
+
+        public const int UserAddresMaxLength = 100;
+        public const int UserAddresMinLength = 5;
     }
 }
