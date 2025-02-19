@@ -10,5 +10,8 @@ namespace AutoPakevApp.Infrastructure.Constants
     {
         public const int BrandNameMaxLength = 50;
         public const int BrandNameMinLength = 2;
+
+        public const int CarModelNameMaxLength = 50;
+        public const int CarModelNameMinLength = 1;
     }
 }
