@@ -4,6 +4,7 @@ using AutoPakevApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoPakevApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250220111229_DomainTablesAdded")]
+    partial class DomainTablesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,27 +109,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                         {
                             t.HasComment("Represents an application user who can use the application and place orders.");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "12345678-abcd-1234-efgh-56789abcdef0",
-                            AccessFailedCount = 0,
-                            Address = "",
-                            ConcurrencyStamp = "8b89b907-daa3-4cda-bae1-b3e8c451a82d",
-                            Email = "admin@mail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Great",
-                            LastName = "Admin",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "USER@MAIL.COM",
-                            NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIu+jEXEh5Ym8ubJWZkfek1ZJKdnj4w6LgcucKWXhk4wOAZ06aA36/FdBgvPTb7VVQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "dac7efc3-77f5-4f49-8261-d664ea70f848",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
-                        });
                 });
 
             modelBuilder.Entity("AutoPakevApp.Infrastructure.Data.Models.Brand", b =>
@@ -149,23 +131,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.ToTable("Brands", t =>
                         {
                             t.HasComment("Car brand");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Toyota"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "BMW"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Audi"
                         });
                 });
 
@@ -210,35 +175,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                         {
                             t.HasComment("Car model of a brand");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BodyType = "Sedan",
-                            BrandId = 1,
-                            EngineType = "Petrol",
-                            Name = "Corolla",
-                            Year = 2020
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BodyType = "Sedan",
-                            BrandId = 1,
-                            EngineType = "Hybrid",
-                            Name = "Camry",
-                            Year = 2021
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BodyType = "SUV",
-                            BrandId = 2,
-                            EngineType = "Diesel",
-                            Name = "X5",
-                            Year = 2022
-                        });
                 });
 
             modelBuilder.Entity("AutoPakevApp.Infrastructure.Data.Models.Category", b =>
@@ -261,48 +197,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.ToTable("Categories", t =>
                         {
                             t.HasComment("Represents a category of auto parts");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Engine Parts"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Brakes"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Suspension"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Exhaust"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Electronics"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Tires & Wheels"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Interior"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Exterior"
                         });
                 });
 
@@ -336,22 +230,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.ToTable("Orders", t =>
                         {
                             t.HasComment("Represents a customer order conatining multiple ordered parts.");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderDate = new DateTime(2025, 2, 20, 17, 58, 42, 566, DateTimeKind.Utc).AddTicks(8669),
-                            TotalPrice = 65.00m,
-                            UserId = "12345678-abcd-1234-efgh-56789abcdef0"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderDate = new DateTime(2025, 2, 20, 17, 58, 42, 566, DateTimeKind.Utc).AddTicks(8672),
-                            TotalPrice = 180.00m,
-                            UserId = "12345678-abcd-1234-efgh-56789abcdef0"
                         });
                 });
 
@@ -390,32 +268,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.ToTable("OrderItems", t =>
                         {
                             t.HasComment("Represents and individual item in an order.");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderId = 1,
-                            PartId = 1,
-                            Price = 50.00m,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderId = 1,
-                            PartId = 2,
-                            Price = 15.00m,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderId = 2,
-                            PartId = 5,
-                            Price = 180.00m,
-                            Quantity = 1
                         });
                 });
 
@@ -461,53 +313,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                         {
                             t.HasComment("Represents an auto part available in the app.");
                         });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 2,
-                            Description = "High-performance brake pads for smooth stopping.",
-                            Name = "Brake Pads",
-                            Price = 50.00m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Description = "Durable oil filter for better engine protection.",
-                            Name = "Oil Filter",
-                            Price = 15.00m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 1,
-                            Description = "Premium spark plug for optimal engine performance.",
-                            Name = "Spark Plug",
-                            Price = 10.00m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 4,
-                            Description = "Stainless steel muffler for reduced noise.",
-                            Name = "Exhaust Muffler",
-                            Price = 120.00m,
-                            StockQuantity = 10
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 5,
-                            Description = "Long-lasting car battery with high cold cranking amps.",
-                            Name = "Car Battery",
-                            Price = 180.00m,
-                            StockQuantity = 10
-                        });
                 });
 
             modelBuilder.Entity("AutoPakevApp.Infrastructure.Data.Models.PartCompatibility", b =>
@@ -536,26 +341,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.ToTable("PartCompatibilities", t =>
                         {
                             t.HasComment("Represents the compatibility relationship between an auto part and a car model.");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CarModelId = 1,
-                            PartId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CarModelId = 2,
-                            PartId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CarModelId = 3,
-                            PartId = 4
                         });
                 });
 
@@ -634,15 +419,6 @@ namespace AutoPakevApp.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClaimType = "user:fullname",
-                            ClaimValue = "Great Admin",
-                            UserId = "12345678-abcd-1234-efgh-56789abcdef0"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
