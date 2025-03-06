@@ -1,4 +1,6 @@
-﻿using AutoPakevApp.Infrastructure.Data;
+﻿using AutoPakevApp.Core.Contracts;
+using AutoPakevApp.Core.Services;
+using AutoPakevApp.Infrastructure.Data;
 using AutoPakevApp.Infrastructure.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            
+            services.AddScoped<IPartService, PartService>();
 
             return services;
         }
