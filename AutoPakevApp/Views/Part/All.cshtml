@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PartViewModel>
+
+@{
+    ViewData["Title"] = "Parts";
+}
+@{
+    ViewData["Title"] = "Parts";
+}
+
+<h1 class="text-center mb-4">Available Parts</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var part in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@part.Name</h5>
+                        <p class="card-text"><strong>Category:</strong> @part.Category</p>
+                        <p class="card-text text-success fw-bold">@part.Price.ToString("C")</p>
+                        <button class="btn btn-warning w-100">Buy</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Bootstrap Styling -->
+<style>
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .btn-warning {
+        background-color: #ff9800;
+        border-color: #ff9800;
+        font-weight: bold;
+    }
+
+    .btn-warning:hover {
+        background-color: #e68900;
+        border-color: #e68900;
+    }
+</style>
