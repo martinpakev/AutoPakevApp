@@ -14,17 +14,30 @@ namespace AutoPakevApp.Core.Services
         {
             this.repository = repository;
         }
-        public async Task<IEnumerable<PartViewModel>> AllAsync()
+        public async Task<PartPagingViewModel> AllAsync(int currentPage, int partsPerPage)
         {
-              return await repository.AllReadOnly<Part>()
-                .Include(p => p.Category)
-                .Select(p => new PartViewModel()
+            var totalParts = await repository.AllReadOnly<Part>().CountAsync();
+            var totalPages = (int)Math.Ceiling(totalParts / (double)partsPerPage);
+
+            var parts = await repository.AllReadOnly<Part>()
+              .Include(p => p.Category)
+              .OrderBy(p => p.Name)
+              .Skip((currentPage - 1) * partsPerPage)
+              .Take(partsPerPage)
+              .Select(p => new PartViewModel()
                 {
                     Name = p.Name,
                     Price = p.Price,
                     Category = p.Category.Name
                 })
                 .ToListAsync();
+
+            return new PartPagingViewModel
+            {
+                Parts = parts,
+                TotalPages = totalPages,
+                CurrentPage = currentPage
+            };
         }
     }
 }

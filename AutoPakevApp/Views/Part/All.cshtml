@@ -1,8 +1,5 @@
-﻿@model IEnumerable<PartViewModel>
+﻿@model PartPagingViewModel
 
-@{
-    ViewData["Title"] = "Parts";
-}
 @{
     ViewData["Title"] = "Parts";
 }
@@ -11,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        @foreach (var part in Model)
+        @foreach (var part in Model.Parts)
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
@@ -25,9 +22,45 @@
             </div>
         }
     </div>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-4">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link pagination-btn" href="@Url.Action("All", new { page = Model.CurrentPage - 1 })">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link pagination-btn disabled">Previous</span>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a class="page-link pagination-btn" href="@Url.Action("All", new { page = i })">@i</a>
+                </li>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link pagination-btn" href="@Url.Action("All", new { page = Model.CurrentPage + 1 })">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <span class="page-link pagination-btn disabled">Next</span>
+                </li>
+            }
+        </ul>
+    </nav>
 </div>
 
-<!-- Bootstrap Styling -->
 <style>
     .card {
         border-radius: 12px;
@@ -35,9 +68,9 @@
         transition: transform 0.2s ease-in-out;
     }
 
-    .card:hover {
-        transform: scale(1.05);
-    }
+        .card:hover {
+            transform: scale(1.05);
+        }
 
     .btn-warning {
         background-color: #ff9800;
@@ -45,8 +78,37 @@
         font-weight: bold;
     }
 
-    .btn-warning:hover {
-        background-color: #e68900;
-        border-color: #e68900;
+        .btn-warning:hover {
+            background-color: #e68900;
+            border-color: #e68900;
+        }
+
+    .pagination-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 0 5px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        background-color: black;
+        border: 2px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .pagination-btn:hover {
+            background-color: orange;
+            border-color: orange;
+        }
+
+        .pagination-btn.disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+
+    /* Active page */
+    .pagination .active .page-link {
+        background-color: orange;
+        border-color: orange;
     }
 </style>

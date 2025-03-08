@@ -4,6 +4,6 @@ namespace AutoPakevApp.Core.Contracts
 {
     public interface IPartService
     {
-        Task<IEnumerable<PartViewModel>> AllAsync();
+        Task<PartPagingViewModel> AllAsync(int currentPage, int partsPerPage);
     }
 }

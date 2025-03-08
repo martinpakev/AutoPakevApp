@@ -13,9 +13,10 @@ namespace AutoPakevApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            var model = await partService.AllAsync();
+            int partsPerPage = 3;
+            var model = await partService.AllAsync(page, partsPerPage);
 
 
             return View(model);
