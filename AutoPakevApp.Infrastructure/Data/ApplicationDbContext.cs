@@ -40,5 +40,7 @@ namespace AutoPakevApp.Infrastructure.Data
         public DbSet<Part> Parts { get; set; }
 
         public DbSet<PartCompatibility> PartCompatibilities { get; set; }
+
+        public DbSet<ShoppingCarItem> ShoppingCarItems { get; set; }
     }
 }
