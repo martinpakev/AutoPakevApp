@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
+@inject SignInManager<AutoPakevApp.Infrastructure.Data.Models.ApplicationUser> SignInManager
+@inject UserManager<AutoPakevApp.Infrastructure.Data.Models.ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,7 +31,33 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Part" asp-action="All">Parts</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
+
+                    <ul class="navbar-nav">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            var fullName = User.FindFirst("UserFullName")?.Value ?? User.Identity?.Name ?? "User";
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">
+                                    Hello, @fullName!
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout"
+                                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </li>
+                        }
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -39,7 +70,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Today.Year - AutoPartsPakev 
+            &copy; @DateTime.Today.Year - AutoPartsPakev
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
