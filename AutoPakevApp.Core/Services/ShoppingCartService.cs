@@ -15,10 +15,27 @@ namespace AutoPakevApp.Core.Services
             this.repository = repository;
         }
 
-        public async Task AddToCartAsync(string userId, int partId, int quantity = 1)
+        public async Task<bool> AddToCartAsync(string userId, int partId, int quantity = 1)
         {
+            var part = repository.AllReadOnly<Part>()
+                .FirstOrDefault(p => p.Id == partId);
+
+            if (part == null)
+            {
+                return false;
+            }
+
             var existingItem = await repository.All<ShoppingCarItem>()
                 .FirstOrDefaultAsync(i => i.ApplicationUserId == userId && i.PartId == partId);
+
+            int currentQuantity = existingItem?.Quantity ?? 0;
+            int newQuantity = currentQuantity + quantity;
+
+            if (newQuantity > part.StockQuantity)
+            {
+                return false;
+            }
+           
 
             if (existingItem != null)
             {
@@ -36,6 +53,7 @@ namespace AutoPakevApp.Core.Services
             }
 
             await repository.SaveChangesAsync();
+            return true;
         }
 
         public async Task DecreaseQuantityAsync(string userId, int partId, int quantity)

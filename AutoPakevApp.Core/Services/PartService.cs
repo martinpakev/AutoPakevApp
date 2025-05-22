@@ -26,6 +26,7 @@ namespace AutoPakevApp.Core.Services
               .Take(partsPerPage)
               .Select(p => new PartViewModel()
                 {
+                    Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
                     Category = p.Category.Name

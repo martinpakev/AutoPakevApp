@@ -6,7 +6,7 @@ namespace AutoPakevApp.Core.Contracts
     public interface IShoppingCartService
     {
         Task<List<ShoppingCartItemViewModel>> GetShoppingCartItemsAsync(string userId);
-        Task AddToCartAsync(string userId, int partId, int quantity = 1);
+        Task<bool> AddToCartAsync(string userId, int partId, int quantity = 1);
 
         Task RemoveFromCartAsync(string userId, int itemId);
 

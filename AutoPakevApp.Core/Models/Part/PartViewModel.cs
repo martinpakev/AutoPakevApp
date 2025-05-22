@@ -4,6 +4,10 @@ namespace AutoPakevApp.Core.Models.Part
 {
     public class PartViewModel
     {
+
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; } = string.Empty;
 

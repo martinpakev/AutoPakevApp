@@ -1,0 +1,14 @@
+﻿@model AutoPakevApp.Core.Models.Part.PartViewModel
+
+<div class="part-details">
+    <h3>@Model.Name</h3>
+    <p>Category: @Model.Category</p>
+    <p>Price: @Model.Price.ToString("C")</p>
+
+    <form asp-controller="ShoppingCart" asp-action="AddToCart" method="post">
+        <input type="hidden" name="partId" value="@Model.Id" />
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" />
+        <button type="submit" class="btn btn-success">Add to Cart</button>
+    </form>
+</div>

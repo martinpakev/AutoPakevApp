@@ -35,6 +35,11 @@
                     <ul class="navbar-nav">
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="ShoppingCart" asp-action="Index">
+                                    🛒 Cart
+                                </a>
+                            </li>
                             var fullName = User.FindFirst("UserFullName")?.Value ?? User.Identity?.Name ?? "User";
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">
